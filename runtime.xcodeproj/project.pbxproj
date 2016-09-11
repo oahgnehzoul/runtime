@@ -10,6 +10,8 @@
 		60217B041D52D671007A8B5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 60217B031D52D671007A8B5A /* main.m */; };
 		60217B0C1D52D6CD007A8B5A /* CustomClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 60217B0B1D52D6CD007A8B5A /* CustomClass.m */; };
 		60217B121D531459007A8B5A /* OtherClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 60217B111D531459007A8B5A /* OtherClass.m */; };
+		60DDA6FB1D853B8700E21B25 /* SuperClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DDA6FA1D853B8700E21B25 /* SuperClass.m */; };
+		60DDA6FE1D853B9900E21B25 /* SubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DDA6FD1D853B9900E21B25 /* SubClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +33,10 @@
 		60217B0B1D52D6CD007A8B5A /* CustomClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomClass.m; sourceTree = "<group>"; };
 		60217B101D531459007A8B5A /* OtherClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherClass.h; sourceTree = "<group>"; };
 		60217B111D531459007A8B5A /* OtherClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherClass.m; sourceTree = "<group>"; };
+		60DDA6F91D853B8700E21B25 /* SuperClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperClass.h; sourceTree = "<group>"; };
+		60DDA6FA1D853B8700E21B25 /* SuperClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuperClass.m; sourceTree = "<group>"; };
+		60DDA6FC1D853B9900E21B25 /* SubClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubClass.h; sourceTree = "<group>"; };
+		60DDA6FD1D853B9900E21B25 /* SubClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +74,10 @@
 				60217B0B1D52D6CD007A8B5A /* CustomClass.m */,
 				60217B101D531459007A8B5A /* OtherClass.h */,
 				60217B111D531459007A8B5A /* OtherClass.m */,
+				60DDA6F91D853B8700E21B25 /* SuperClass.h */,
+				60DDA6FA1D853B8700E21B25 /* SuperClass.m */,
+				60DDA6FC1D853B9900E21B25 /* SubClass.h */,
+				60DDA6FD1D853B9900E21B25 /* SubClass.m */,
 			);
 			path = runtime;
 			sourceTree = "<group>";
@@ -128,6 +138,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60DDA6FB1D853B8700E21B25 /* SuperClass.m in Sources */,
+				60DDA6FE1D853B9900E21B25 /* SubClass.m in Sources */,
 				60217B041D52D671007A8B5A /* main.m in Sources */,
 				60217B0C1D52D6CD007A8B5A /* CustomClass.m in Sources */,
 				60217B121D531459007A8B5A /* OtherClass.m in Sources */,
@@ -253,6 +265,7 @@
 				60217B091D52D671007A8B5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
