@@ -26,4 +26,6 @@
 //转换成字典
 - (NSDictionary *)convertToDictionary;
 
+- (void)sing;
+
 @end

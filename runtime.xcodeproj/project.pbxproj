@@ -14,6 +14,7 @@
 		60DDA6FE1D853B9900E21B25 /* SubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DDA6FD1D853B9900E21B25 /* SubClass.m */; };
 		60DDA7011D85C67300E21B25 /* People.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DDA7001D85C67300E21B25 /* People.m */; };
 		60DDA7041D85CD3300E21B25 /* People+Associated.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DDA7031D85CD3300E21B25 /* People+Associated.m */; };
+		60DDA7071D871E8A00E21B25 /* Bird.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DDA7061D871E8A00E21B25 /* Bird.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,8 @@
 		60DDA7001D85C67300E21B25 /* People.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = People.m; sourceTree = "<group>"; };
 		60DDA7021D85CD3300E21B25 /* People+Associated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "People+Associated.h"; sourceTree = "<group>"; };
 		60DDA7031D85CD3300E21B25 /* People+Associated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "People+Associated.m"; sourceTree = "<group>"; };
+		60DDA7051D871E8A00E21B25 /* Bird.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bird.h; sourceTree = "<group>"; };
+		60DDA7061D871E8A00E21B25 /* Bird.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bird.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +81,8 @@
 				60217B031D52D671007A8B5A /* main.m */,
 				60DDA6FF1D85C67300E21B25 /* People.h */,
 				60DDA7001D85C67300E21B25 /* People.m */,
+				60DDA7051D871E8A00E21B25 /* Bird.h */,
+				60DDA7061D871E8A00E21B25 /* Bird.m */,
 				60DDA7021D85CD3300E21B25 /* People+Associated.h */,
 				60DDA7031D85CD3300E21B25 /* People+Associated.m */,
 				60217B0A1D52D6CD007A8B5A /* CustomClass.h */,
@@ -150,6 +155,7 @@
 			files = (
 				60DDA7011D85C67300E21B25 /* People.m in Sources */,
 				60DDA6FB1D853B8700E21B25 /* SuperClass.m in Sources */,
+				60DDA7071D871E8A00E21B25 /* Bird.m in Sources */,
 				60DDA7041D85CD3300E21B25 /* People+Associated.m in Sources */,
 				60DDA6FE1D853B9900E21B25 /* SubClass.m in Sources */,
 				60217B041D52D671007A8B5A /* main.m in Sources */,

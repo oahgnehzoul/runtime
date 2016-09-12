@@ -156,4 +156,43 @@
     return nil;
 }
 
+#pragma mark - 消息动态解析
+
+// 一、是否动态添加方法，返回 NO 则进入第二步
++ (BOOL)resolveInstanceMethod:(SEL)sel {
+    if ([NSStringFromSelector(sel) isEqualToString:@"sing"]) {
+        class_addMethod(self, sel, (IMP)otherSing, "v@:");
+        return YES;
+    }
+    return [super resolveInstanceMethod:sel];
+}
+
+void otherSing(id self,SEL cmd) {
+    NSLog(@"%@唱歌啦",((People *)self).name);
+}
+// 二、用于指定备选对象响应这个 sel,不能指定为 self。如果返回对象就会调用对象的方法;如果不指定备选对象响应 aSelector，则进入第三步
+- (id)forwardingTargetForSelector:(SEL)aSelector {
+    return nil;
+}
+// 三、通过 methodSignatureForSelector 方法签名，返回 nil 则消息无法处理，返回 methodSignature 则进入下一步
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
+    if ([NSStringFromSelector(aSelector) isEqualToString:@"dance"]) {
+        return [NSMethodSignature signatureWithObjCTypes:"v@:"];
+    }
+    return [super methodSignatureForSelector:aSelector];
+}
+// 四、我们可以通过 anInvocation 对象做很多处理，例如修改实现方法、修改响应对象。方法调用成功则结束；如果失败就会进入 doesNotRecognizeSelector，如果我们没有实现这个方法，就会 crash
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
+    [anInvocation setSelector:@selector(eat)];
+    [anInvocation invokeWithTarget:self];
+}
+// 如果 forwardInvocation 没有实现，就会调用此方法
+- (void)doesNotRecognizeSelector:(SEL)aSelector {
+    NSLog(@"消息无法处理:%@",NSStringFromSelector(aSelector));
+}
+
+- (void)eat {
+    NSLog(@"eat come on");
+}
+
 @end

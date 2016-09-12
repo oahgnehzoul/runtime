@@ -12,6 +12,7 @@
 #import "CustomClass.h"
 #import "People.h"
 #import "People+Associated.h"
+#import "Bird.h"
 
 void sayFunction(id self, SEL _cmd, id some) {
     
@@ -141,6 +142,16 @@ int main(int argc, const char * argv[]) {
     
 //    ==========================================================================
     
+    
+    
+    [teacher sing];
+    
+    Bird *bird = [[Bird alloc] init];
+    bird.name = @"小小鸟";
+    objc_msgSend(bird, @selector(sing));
+    
+    objc_msgSend(teacher, @selector(dance));
+//    ===========================================================================
     
     NSDictionary *dic = @{
                           @"name":@"苍井空",
