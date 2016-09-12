@@ -10,6 +10,8 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 #import "CustomClass.h"
+#import "People.h"
+#import "People+Associated.h"
 
 void sayFunction(id self, SEL _cmd, id some) {
     
@@ -41,6 +43,10 @@ void sayFunction(id self, SEL _cmd, id some) {
 
 int main(int argc, const char * argv[]) {
 
+    
+//    ===============================================================
+    
+//    动态常见一个类，并创建成员变量和方法，最后赋值成员变量并发送消息(https://www.ianisme.com/ios/2019.html)
     
     //1. 动态创建一个继承自 NSObject 的 Person对象
 //    objc_allocateClassPair(<#__unsafe_unretained Class superclass#>, <#const char *name#>, <#size_t extraBytes#>)
@@ -95,6 +101,57 @@ int main(int argc, const char * argv[]) {
     personInstance = nil;
     //13. 销毁类
     objc_disposeClassPair(Person);
+    
+    
+//    ==================================================================
+    
+    
+    // 获取所有对象的属性名称和属性值；实例变量和变量值；对象方法名和方法参数数量
+    
+    People *teacher = [[People alloc] init];
+    teacher.name = @"苍井空";
+    teacher.age = 18;
+    [teacher setValue:@"老师" forKey:@"occupation"];
+    
+    NSDictionary *propertyResultDic = [teacher allProperties];
+    for (NSString *propertyName in propertyResultDic) {
+        NSLog(@"propertyName:%@,propertyValue:%@",propertyName,propertyResultDic[propertyName]);
+    }
+    
+    NSDictionary *ivarsResultDic = [teacher allIvars];
+    for (NSString *ivarName in ivarsResultDic) {
+        NSLog(@"IvarName:%@,ivarValue:%@",ivarName,ivarsResultDic[ivarName]);
+    }
+    
+    NSDictionary *methodResultDic = [teacher allMethods];
+    for (NSString *method in methodResultDic) {
+        NSLog(@"methodName:%@,argumentsCount:%@",method,methodResultDic[method]);
+    }
+    
+    
+//  ==========================================================================
+    
+    
+    teacher.associatedBust = @90;
+    teacher.associatedCallBack = ^{
+        NSLog(@"苍老师要写代码了");
+    };
+    
+    teacher.associatedCallBack();
+    
+//    ==========================================================================
+    
+    
+    NSDictionary *dic = @{
+                          @"name":@"苍井空",
+                          @"age":@18
+                          };
+    
+    People *cangTeacher = [[People alloc] initWithDictionary:dic];
+    NSLog(@"热烈欢迎，%ld岁的%@来游玩",cangTeacher.age,cangTeacher.name);
+    
+    NSDictionary *convertedDic = [cangTeacher convertToDictionary];
+    NSLog(@"convertedDic:%@",convertedDic);
     
     //获取 指定类 cls 的类名。
 //    class_getName(<#__unsafe_unretained Class cls#>)
