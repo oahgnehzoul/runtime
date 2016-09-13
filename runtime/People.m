@@ -12,6 +12,18 @@
 
 @implementation People
 
++ (instancetype)sharedInstance
+{
+    static People* instance = nil;
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [People new];
+    });
+
+    return instance;
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super init]) {
         unsigned int count = 0;

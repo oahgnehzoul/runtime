@@ -13,6 +13,8 @@
 #import "People.h"
 #import "People+Associated.h"
 #import "Bird.h"
+#import "SubClass.h"
+#import "SuperClass.h"
 
 void sayFunction(id self, SEL _cmd, id some) {
     
@@ -39,12 +41,21 @@ void sayFunction(id self, SEL _cmd, id some) {
      *  the instance variable specified by \e name.
      */
 //    class_getInstanceVariable(<#__unsafe_unretained Class cls#>, <#const char *name#>)
-    NSLog(@"%@岁的%@说:%@",object_getIvar(self, class_getInstanceVariable([self class], "_age")),[self valueForKey:@"name"],some);
+    NSLog(@"身高为%@的%@岁的%@说:%@", object_getIvar(self,class_getInstanceVariable([self class],"_height")) ,object_getIvar(self, class_getInstanceVariable([self class], "_age")),[self valueForKey:@"name"],some);
+}
+
+void isMetaClass(char *str) {
+    Class cls = objc_getMetaClass(str);
+    if (class_isMetaClass(cls)) {
+        NSLog(@"YES,%@,%@,%@",cls,class_getSuperclass(cls),object_getClass(cls));
+    } else {
+        NSLog(@"NO");
+    }
 }
 
 int main(int argc, const char * argv[]) {
 
-    
+    NSLog(@"指针内存大小：%lu",sizeof(char *));
 //    ===============================================================
     
 //    动态常见一个类，并创建成员变量和方法，最后赋值成员变量并发送消息(https://www.ianisme.com/ios/2019.html)
@@ -76,6 +87,14 @@ int main(int argc, const char * argv[]) {
     class_addIvar(Person, "_age", sizeof(int), log2(sizeof(int)), @encode(int));
     
     
+//    class_addProperty(<#__unsafe_unretained Class cls#>, <#const char *name#>, <#const objc_property_attribute_t *attributes#>, <#unsigned int attributeCount#>)
+//    objc_property_attribute_t type = {"T","@\"NSString\""};
+//    objc_property_attribute_t ownership = {"C",""};
+//    objc_property_attribute_t isAtomic = {"N",""};
+//    objc_property_attribute_t backingivar = {"V","_height"};
+//    objc_property_attribute_t attrs[] = {type,ownership,isAtomic,backingivar};
+//    class_addProperty(Person, "height", attrs, 4);
+    
     //4. 注册方法名为 say 的方法
 //    sel_registerName(<#const char *str#>)
     SEL s = sel_registerName("say");
@@ -90,10 +109,12 @@ int main(int argc, const char * argv[]) {
     id personInstance = [[Person alloc] init];
     //8. KVC 动态改变 personInstance 中的实例变量
     [personInstance setValue:@"苍老师" forKey:@"name"];
+    
     //9. 获取_age 对应的 Ivar
     Ivar ageIvar = class_getInstanceVariable(Person, "_age");
     //10.给_age 对应的 Ivar 赋值
     object_setIvar(personInstance, ageIvar, @18);
+    
     //11.调用 s 方法选择器对应的方法
 //    ((void (*)(id, SEL, id))objc_msgSend)(personInstance, s,@"大家好！");
     objc_msgSend(personInstance, s,@"大家好!");
@@ -164,6 +185,40 @@ int main(int argc, const char * argv[]) {
     NSDictionary *convertedDic = [cangTeacher convertToDictionary];
     NSLog(@"convertedDic:%@",convertedDic);
     
+    
+    
+    NSLog(@"---------------------");
+    
+    SubClass *sub = [[SubClass alloc] init];
+    NSLog(@"%@,%@",object_getClass(sub),class_getSuperclass(object_getClass(sub)));
+    Class cls = objc_getMetaClass("SubClass");
+    if (class_isMetaClass(cls)) {
+        NSLog(@"YES,%@,%@,%@",cls,class_getSuperclass(cls),object_getClass(cls));
+    } else {
+        NSLog(@"NO");
+    }
+    
+    NSLog(@"---------------------");
+
+    SuperClass *sup = [[SuperClass alloc] init];
+    NSLog(@"%@,%@",object_getClass(sup),class_getSuperclass(object_getClass(sup)));
+//   Class object_getClass(<#id obj#>) return an class of the obj
+//   Class objc_getClass(<#const char *name#>) Returns the class definition of a specified class.
+    cls = objc_getMetaClass("SuperClass");
+    if (class_isMetaClass(cls)) {
+        NSLog(@"YES,%@,%@,%@",cls,class_getSuperclass(cls),object_getClass(cls));
+    }
+    NSLog(@"---------------------");
+
+    cls = objc_getMetaClass("NSObject");
+    NSLog(@"YES,%@,%@,%@",cls,class_getSuperclass(cls),object_getClass(cls));
+    
+//    class_getSuperclass(<#__unsafe_unretained Class cls#>) 找到 cls 的 父类，
+//    object_getClass(<#id obj#>) 找到 obj 的 isa 指针指向的对象。
+    NSLog(@"---------------------");
+    
+    
+    
     //获取 指定类 cls 的类名。
 //    class_getName(<#__unsafe_unretained Class cls#>)
     const char *str = class_getName([CustomClass class]);
@@ -174,12 +229,12 @@ int main(int argc, const char * argv[]) {
     // 返回实例所属的类,  返回类的元类
 
     //NSObject的元类 是自己。
-    NSLog(@"metaClass of NSObject:%@",objc_getClass(class_getName([NSObject class])));
+//    NSLog(@"metaClass of NSObject:%@",objc_getClass(class_getName([NSObject class])));
     
     // 获取一个类的元类
     NSLog(@"metaClass of CustomClass:%@",objc_getClass("CustomClass"));
-    Class cls = objc_getMetaClass("CustomClass");
-    NSLog(@"%@,%@,%@",cls,class_getSuperclass(cls),objc_getClass(class_getName(cls)));
+//    Class cls = objc_getMetaClass("CustomClass");
+//    NSLog(@"%@,%@,%@",cls,class_getSuperclass(cls),objc_getClass(class_getName(cls)));
     //判断一个类 cls 是否是元类
 //    class_isMetaClass(<#__unsafe_unretained Class cls#>)
     NSLog(@"NSObject IsMetaClass:%@",(class_isMetaClass([NSObject class])) ? @"yes":@"no");

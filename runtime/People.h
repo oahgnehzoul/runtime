@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface People : NSObject<NSCoding>
-{
+@interface People : NSObject<NSCoding>{
     NSString *_occupation;
     NSString *_nationality;
 }
+
++ (instancetype)sharedInstance;
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) NSUInteger age;
